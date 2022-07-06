@@ -6,11 +6,13 @@
         <entry key="..\:/AndroidResources/ToDo/app/src/main/res/layout/activity_about.xml" value="0.19010416666666666" />
         <entry key="..\:/AndroidResources/ToDo/app/src/main/res/layout/activity_main.xml" value="0.20416666666666666" />
         <entry key="..\:/AndroidResources/ToDo/app/src/main/res/layout/fragment_note_edit.xml" value="0.18" />
-        <entry key="..\:/AndroidResources/ToDo/app/src/main/res/layout/fragment_notes_detail.xml" value="0.20416666666666666" />
+        <entry key="..\:/AndroidResources/ToDo/app/src/main/res/layout/fragment_notes_detail.xml" value="0.22" />
         <entry key="..\:/AndroidResources/ToDo/app/src/main/res/layout/fragment_noteslist.xml" value="0.20416666666666666" />
         <entry key="..\:/AndroidResources/ToDo/app/src/main/res/layout/note_list_item.xml" value="0.20416666666666666" />
         <entry key="..\:/AndroidResources/ToDo/app/src/main/res/menu/menu.xml" value="0.20416666666666666" />
         <entry key="..\:/AndroidResources/ToDo/app/src/main/res/menu/menu_note_details.xml" value="0.203125" />
+        <entry key="..\:/AndroidResources/ToDo/app/src/main/res/menu/note_details_menu.xml" value="0.20416666666666666" />
+        <entry key="..\:/AndroidResources/ToDo/app/src/main/res/menu/note_edit_menu.xml" value="0.20416666666666666" />
       </map>
     </option>
   </component>

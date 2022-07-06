@@ -48,7 +48,7 @@ class NotesListFragment : Fragment() {
             )
         }
 
-        adapter.submitList(noteViewModel.items)
+        adapter.submitList(noteViewModel.getNoteItems())
         binding?.textView?.visibility = View.GONE
     }
 

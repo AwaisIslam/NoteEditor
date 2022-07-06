@@ -52,7 +52,7 @@ class NotesDetailFragment : Fragment() {
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
-        inflater.inflate(R.menu.menu_note_details, menu)
+        inflater.inflate(R.menu.note_details_menu, menu)
 
         super.onCreateOptionsMenu(menu, inflater)
     }
