@@ -4,15 +4,15 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
-import com.ak.noteeditor.data.NoteEditorModel
+import com.ak.noteeditor.data.NoteModel
 import com.ak.noteeditor.databinding.NoteListItemBinding
 import com.ak.noteeditor.viewholder.NoteListViewHolder
 
 class NoteListAdapter(
     private val inflater: LayoutInflater,
-    private val onCheckBoxToggle: (NoteEditorModel) -> Unit,
-    private val onItemClick: (NoteEditorModel) -> Unit
-) : ListAdapter<NoteEditorModel, NoteListViewHolder>(DiffCallback) {
+    private val onCheckBoxToggle: (NoteModel) -> Unit,
+    private val onItemClick: (NoteModel) -> Unit
+) : ListAdapter<NoteModel, NoteListViewHolder>(DiffCallback) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) =
         NoteListViewHolder(
@@ -25,13 +25,13 @@ class NoteListAdapter(
         holder.bind(getItem(position))
     }
 
-    private object DiffCallback : DiffUtil.ItemCallback<NoteEditorModel>() {
-        override fun areItemsTheSame(oldItem: NoteEditorModel, newItem: NoteEditorModel) =
+    private object DiffCallback : DiffUtil.ItemCallback<NoteModel>() {
+        override fun areItemsTheSame(oldItem: NoteModel, newItem: NoteModel) =
             oldItem.id == newItem.id
 
         override fun areContentsTheSame(
-            oldItem: NoteEditorModel,
-            newItem: NoteEditorModel
+            oldItem: NoteModel,
+            newItem: NoteModel
         ) = oldItem.isCompleted == newItem.isCompleted &&
                 oldItem.description == newItem.description
     }

@@ -8,7 +8,7 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.ak.noteeditor.R
-import com.ak.noteeditor.data.NoteEditorModel
+import com.ak.noteeditor.data.NoteModel
 import com.ak.noteeditor.databinding.FragmentNoteEditBinding
 import com.ak.noteeditor.viewmodel.SingleNoteViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -72,7 +72,7 @@ class NoteEditFragment : Fragment() {
                 description = editTextNoteDesc.text.toString(),
                 isCompleted = checkBoxIsEditNoteCompleted.isChecked,
                 notes = editTextEditNote.text.toString()
-            ) ?: NoteEditorModel(
+            ) ?: NoteModel(
                 description = editTextNoteDesc.text.toString(),
                 isCompleted = checkBoxIsEditNoteCompleted.isChecked,
                 notes = editTextEditNote.text.toString()
