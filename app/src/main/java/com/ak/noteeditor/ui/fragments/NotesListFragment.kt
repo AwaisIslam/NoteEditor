@@ -67,6 +67,8 @@ class NotesListFragment : Fragment() {
                 }
             }
         }
+
+        binding?.textViewPlaceholder?.visibility = View.GONE
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {

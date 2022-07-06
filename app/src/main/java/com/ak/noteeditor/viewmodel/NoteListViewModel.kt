@@ -7,6 +7,7 @@ import com.ak.noteeditor.repository.NoteEditorRepository
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.stateIn
+import kotlinx.coroutines.launch
 
 data class NoteListViewState(
     val items: List<NoteModel> = listOf()
@@ -21,6 +22,9 @@ class NoteListViewModel(private val repository: NoteEditorRepository): ViewModel
         .stateIn(viewModelScope, SharingStarted.Eagerly, NoteListViewState())
 
     fun save(model: NoteModel) {
-        repository.save(model)
+        viewModelScope.launch {
+
+            repository.save(model)
+        }
     }
 }
