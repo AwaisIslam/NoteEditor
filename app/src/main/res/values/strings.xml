@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">Note Editor</string>
+    <string name="msg_empty">Placeholder Text</string>
+    <string name="menu_about">About</string>
+    <string name="note_item_completed">Note item is completed</string>
+    <string name="note_created_on">Created On:</string>
+</resources>
