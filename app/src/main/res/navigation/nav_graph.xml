@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
     app:startDestination="@id/notesListFragment">
 
@@ -16,6 +17,18 @@
         android:id="@+id/notesDetailFragment"
         android:name="com.ak.noteeditor.ui.fragments.NotesDetailFragment"
         android:label="@string/app_name" >
+        <argument
+            android:name="noteId"
+            app:argType="string" />
+        <action
+            android:id="@+id/action_notesDetailFragment_to_noteEditFragment"
+            app:destination="@id/noteEditFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/noteEditFragment"
+        android:name="com.ak.noteeditor.ui.fragments.NoteEditFragment"
+        android:label="@string/app_name"
+        tools:layout="@layout/fragment_note_edit" >
         <argument
             android:name="noteId"
             app:argType="string" />

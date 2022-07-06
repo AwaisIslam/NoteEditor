@@ -2,11 +2,11 @@ package com.ak.noteeditor.ui.fragments
 
 import android.os.Bundle
 import android.text.format.DateUtils
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
+import com.ak.noteeditor.R
 import com.ak.noteeditor.databinding.FragmentNotesDetailBinding
 import com.ak.noteeditor.viewmodel.SingleNoteViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -20,6 +20,11 @@ class NotesDetailFragment : Fragment() {
 
     private val viewModel: SingleNoteViewModel by viewModel { parametersOf(args.noteId) }
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+
+        setHasOptionsMenu(true)
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -46,9 +51,33 @@ class NotesDetailFragment : Fragment() {
         }
     }
 
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        inflater.inflate(R.menu.menu_note_details, menu)
+
+        super.onCreateOptionsMenu(menu, inflater)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when (item.itemId) {
+            R.id.action_edit -> {
+                showEditFragment()
+                return true
+            }
+
+        }
+
+        return super.onOptionsItemSelected(item)
+    }
+
     override fun onDestroy() {
         binding = null
 
         super.onDestroy()
+    }
+
+    private fun showEditFragment() {
+        findNavController().navigate(
+            NotesDetailFragmentDirections.actionNotesDetailFragmentToNoteEditFragment(args.noteId)
+        )
     }
 }
