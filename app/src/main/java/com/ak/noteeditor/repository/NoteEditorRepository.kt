@@ -4,20 +4,7 @@ import com.ak.noteeditor.data.NoteEditorModel
 
 class NoteEditorRepository {
 
-    var items = listOf(
-        NoteEditorModel(
-            description = "note 1",
-            isCompleted = true,
-            notes = "https://www.google.com"
-        ),
-        NoteEditorModel(
-            description = "note 2"
-        ),
-        NoteEditorModel(
-            description = "note 3",
-            notes = "https://www.google.com"
-        )
-    )
+    var items = emptyList<NoteEditorModel>()
 
     fun save(model: NoteEditorModel) {
         items = if (items.any { it.id == model.id }) {
@@ -27,6 +14,10 @@ class NoteEditorRepository {
         }
     }
 
-    fun find(noteId: String) = items.find{ it.id == noteId }
+    fun deleteNote(model: NoteEditorModel) {
+        items = items.filter { it.id != model.id }
+    }
+
+    fun find(noteId: String?) = items.find{ it.id == noteId }
 
 }

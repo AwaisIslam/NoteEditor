@@ -1,9 +1,7 @@
 package com.ak.noteeditor.ui.fragments
 
 import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
@@ -22,6 +20,12 @@ class NotesListFragment : Fragment() {
     private val noteViewModel: NoteListViewModel by viewModel()
 
     private var binding: FragmentNoteslistBinding? = null
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+
+        setHasOptionsMenu(true)
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -49,7 +53,30 @@ class NotesListFragment : Fragment() {
         }
 
         adapter.submitList(noteViewModel.getNoteItems())
-        binding?.textView?.visibility = View.GONE
+
+        binding?.textViewPlaceholder?.visibility =
+            if (adapter.itemCount == 0) View.VISIBLE else View.GONE
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        inflater.inflate(R.menu.new_note_menu,menu)
+
+        super.onCreateOptionsMenu(menu, inflater)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when(item.itemId){
+            R.id.action_add_new_note -> {
+                addNotes()
+                return true
+            }
+        }
+
+        return super.onOptionsItemSelected(item)
+    }
+
+    private fun addNotes() {
+        findNavController().navigate(NotesListFragmentDirections.actionNotesListFragmentToNoteEditFragment(null))
     }
 
     private fun showFragmentDetails(model: NoteEditorModel) {

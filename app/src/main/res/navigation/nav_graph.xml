@@ -12,6 +12,13 @@
         <action
             android:id="@+id/action_notesListFragment_to_notesDetailFragment"
             app:destination="@id/notesDetailFragment" />
+        <action
+            android:id="@+id/action_notesListFragment_to_noteEditFragment"
+            app:destination="@id/noteEditFragment" >
+            <argument
+                android:name="noteId"
+                android:defaultValue="@null" />
+        </action>
     </fragment>
     <fragment
         android:id="@+id/notesDetailFragment"
@@ -31,6 +38,7 @@
         tools:layout="@layout/fragment_note_edit" >
         <argument
             android:name="noteId"
-            app:argType="string" />
+            app:argType="string"
+            app:nullable="true" />
     </fragment>
 </navigation>

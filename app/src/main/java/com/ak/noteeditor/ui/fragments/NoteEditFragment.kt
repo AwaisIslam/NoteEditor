@@ -46,6 +46,7 @@ class NoteEditFragment : Fragment() {
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         inflater.inflate(R.menu.note_edit_menu,menu)
+        menu.findItem(R.id.action_delete).isVisible = args.noteId != null
 
         super.onCreateOptionsMenu(menu, inflater)
     }
@@ -54,6 +55,10 @@ class NoteEditFragment : Fragment() {
         when(item.itemId){
             R.id.action_save -> {
                 saveNote()
+                return true
+            }
+            R.id.action_delete ->{
+                deleteNote()
                 return true
             }
         }
@@ -81,6 +86,19 @@ class NoteEditFragment : Fragment() {
     private fun navigateToNoteListFragment() {
         hideKeyboard()
         findNavController().popBackStack()
+    }
+
+    private fun navigateToNoteList() {
+        hideKeyboard()
+        findNavController().popBackStack(R.id.notesListFragment,false)
+    }
+
+    private fun deleteNote() {
+        val model = viewModel.getNoteModel()
+        model?.let {
+            viewModel.deleteNote(it)
+        }
+        navigateToNoteList()
     }
 
     private fun hideKeyboard() {
