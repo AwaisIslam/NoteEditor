@@ -39,7 +39,7 @@ class NotesDetailFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         viewLifecycleOwner.lifecycleScope.launchWhenStarted {
-            viewModel.states.collect{ state->
+            viewModel.states.collect{state->
                 state.item?.let {
                     binding?.apply {
                         imageViewCompleted.visibility = if (it.isCompleted) View.VISIBLE else View.GONE

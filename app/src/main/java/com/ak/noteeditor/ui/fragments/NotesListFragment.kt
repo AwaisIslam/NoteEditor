@@ -67,8 +67,6 @@ class NotesListFragment : Fragment() {
                 }
             }
         }
-
-        binding?.textViewPlaceholder?.visibility = View.GONE
     }
 
     override fun onDestroy() {
