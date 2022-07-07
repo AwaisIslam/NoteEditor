@@ -38,22 +38,18 @@ class NotesDetailFragment : Fragment() {
         .root
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        viewLifecycleOwner.lifecycleScope.launchWhenStarted {
-            viewModel.states.collect{state->
-                state.item?.let {
-                    binding?.apply {
-                        imageViewCompleted.visibility = if (it.isCompleted) View.VISIBLE else View.GONE
-                        textViewNoteTitle.text = it.description
-                        textViewNoteCreatedDate.text = DateUtils.getRelativeDateTimeString(
-                            requireContext(),
-                            it.createdOn.toEpochMilli(),
-                            DateUtils.MINUTE_IN_MILLIS,
-                            DateUtils.WEEK_IN_MILLIS,
-                            0
-                        )
-                        textViewNoteDetail.text = it.notes
-                    }
-                }
+        viewModel.getNoteModel()?.let {
+            binding?.apply {
+                imageViewCompleted.visibility = if (it.isCompleted) View.VISIBLE else View.GONE
+                textViewNoteTitle.text = it.description
+                textViewNoteCreatedDate.text = DateUtils.getRelativeDateTimeString(
+                    requireContext(),
+                    it.createdOn.toEpochMilli(),
+                    DateUtils.MINUTE_IN_MILLIS,
+                    DateUtils.WEEK_IN_MILLIS,
+                    0
+                )
+                textViewNoteDetail.text = it.notes
             }
         }
     }

@@ -37,17 +37,11 @@ class NoteEditFragment : Fragment() {
         .root
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        viewLifecycleOwner.lifecycleScope.launchWhenStarted {
-            viewModel.states.collect {state->
-                if (savedInstanceState == null){
-                    state.item?.let {
-                        binding?.apply {
-                            checkBoxIsEditNoteCompleted.isChecked = it.isCompleted
-                            editTextNoteDesc.setText(it.description)
-                            editTextEditNote.setText(it.notes)
-                        }
-                    }
-                }
+        viewModel.getNoteModel()?.let {
+            binding?.apply {
+                checkBoxIsEditNoteCompleted.isChecked = it.isCompleted
+                editTextNoteDesc.setText(it.description)
+                editTextEditNote.setText(it.notes)
             }
         }
     }
@@ -75,7 +69,7 @@ class NoteEditFragment : Fragment() {
 
     private fun saveNote() {
         binding?.apply {
-            val model = viewModel.states.value.item
+            val model = viewModel.getNoteModel()
             val edited = model?.copy(
                 description = editTextNoteDesc.text.toString(),
                 isCompleted = checkBoxIsEditNoteCompleted.isChecked,
@@ -102,7 +96,7 @@ class NoteEditFragment : Fragment() {
     }
 
     private fun deleteNote() {
-        val model = viewModel.states.value.item
+        val model = viewModel.getNoteModel()
         model?.let {
             viewModel.deleteNote(it)
         }
