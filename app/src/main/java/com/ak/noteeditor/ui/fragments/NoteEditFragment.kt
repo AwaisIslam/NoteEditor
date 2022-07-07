@@ -9,7 +9,7 @@ import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.ak.noteeditor.R
-import com.ak.noteeditor.data.NoteModel
+import com.ak.noteeditor.data.NoteEditorModel
 import com.ak.noteeditor.databinding.FragmentNoteEditBinding
 import com.ak.noteeditor.viewmodel.SingleNoteViewModel
 import kotlinx.coroutines.flow.collect
@@ -80,7 +80,7 @@ class NoteEditFragment : Fragment() {
                 description = editTextNoteDesc.text.toString(),
                 isCompleted = checkBoxIsEditNoteCompleted.isChecked,
                 notes = editTextEditNote.text.toString()
-            ) ?: NoteModel(
+            ) ?: NoteEditorModel(
                 description = editTextNoteDesc.text.toString(),
                 isCompleted = checkBoxIsEditNoteCompleted.isChecked,
                 notes = editTextEditNote.text.toString()

@@ -3,16 +3,16 @@ package com.ak.noteeditor.ui.fragments
 import android.os.Bundle
 import android.view.*
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.lifecycleScope
+import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.ak.noteeditor.R
 import com.ak.noteeditor.adapter.NoteListAdapter
-import com.ak.noteeditor.data.NoteModel
+import com.ak.noteeditor.data.NoteEditorModel
 import com.ak.noteeditor.databinding.FragmentNoteslistBinding
+import com.ak.noteeditor.databinding.NoteListItemBinding
 import com.ak.noteeditor.viewmodel.NoteListViewModel
-import kotlinx.coroutines.flow.collect
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class NotesListFragment : Fragment() {
@@ -52,26 +52,10 @@ class NotesListFragment : Fragment() {
             )
         }
 
-        viewLifecycleOwner.lifecycleScope.launchWhenStarted {
-            noteViewModel.states.collect{ state->
-                adapter.submitList(state.items)
+        adapter.submitList(noteViewModel.getNoteItems())
 
-                binding?.apply {
-                    when{
-                        state.items.isEmpty() -> {
-                            textViewPlaceholder.visibility = View.VISIBLE
-                            textViewPlaceholder.setText(R.string.msg_empty)
-                        }
-                        else -> textViewPlaceholder.visibility = View.GONE
-                    }
-                }
-            }
-        }
-    }
-
-    override fun onDestroy() {
-        binding = null
-        super.onDestroy()
+        binding?.textViewPlaceholder?.visibility =
+            if (adapter.itemCount == 0) View.VISIBLE else View.GONE
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
@@ -91,11 +75,16 @@ class NotesListFragment : Fragment() {
         return super.onOptionsItemSelected(item)
     }
 
-    private fun showFragmentDetails(model: NoteModel) {
+    private fun addNotes() {
+        findNavController().navigate(NotesListFragmentDirections.actionNotesListFragmentToNoteEditFragment(null))
+    }
+
+    private fun showFragmentDetails(model: NoteEditorModel) {
         findNavController().navigate(NotesListFragmentDirections.actionNotesListFragmentToNotesDetailFragment(model.id))
     }
 
-    private fun addNotes() {
-        findNavController().navigate(NotesListFragmentDirections.actionNotesListFragmentToNoteEditFragment(null))
+    override fun onDestroy() {
+        binding = null
+        super.onDestroy()
     }
 }

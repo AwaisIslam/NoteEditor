@@ -1,16 +1,16 @@
 package com.ak.noteeditor.viewholder
 
 import androidx.recyclerview.widget.RecyclerView
-import com.ak.noteeditor.data.NoteModel
+import com.ak.noteeditor.data.NoteEditorModel
 import com.ak.noteeditor.databinding.NoteListItemBinding
 
 class NoteListViewHolder(
     private val binding: NoteListItemBinding,
-    val onCheckBoxToggle: (NoteModel) -> Unit,
-    val onItemClick: (NoteModel) -> Unit
+    val onCheckBoxToggle: (NoteEditorModel) -> Unit,
+    val onItemClick: (NoteEditorModel) -> Unit
 ): RecyclerView.ViewHolder(binding.root) {
 
-    fun bind(model: NoteModel) {
+    fun bind(model: NoteEditorModel) {
         binding.apply {
             root.setOnClickListener { onItemClick(model) }
             checkBoxIsCompleted.isChecked = model.isCompleted
