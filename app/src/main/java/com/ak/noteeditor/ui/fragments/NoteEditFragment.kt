@@ -5,14 +5,12 @@ import android.view.*
 import android.view.inputmethod.InputMethodManager
 import androidx.core.content.getSystemService
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.ak.noteeditor.R
-import com.ak.noteeditor.data.NoteEditorModel
+import com.ak.noteeditor.data.NoteModel
 import com.ak.noteeditor.databinding.FragmentNoteEditBinding
 import com.ak.noteeditor.viewmodel.SingleNoteViewModel
-import kotlinx.coroutines.flow.collect
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import org.koin.core.parameter.parametersOf
 
@@ -74,7 +72,7 @@ class NoteEditFragment : Fragment() {
                 description = editTextNoteDesc.text.toString(),
                 isCompleted = checkBoxIsEditNoteCompleted.isChecked,
                 notes = editTextEditNote.text.toString()
-            ) ?: NoteEditorModel(
+            ) ?: NoteModel(
                 description = editTextNoteDesc.text.toString(),
                 isCompleted = checkBoxIsEditNoteCompleted.isChecked,
                 notes = editTextEditNote.text.toString()

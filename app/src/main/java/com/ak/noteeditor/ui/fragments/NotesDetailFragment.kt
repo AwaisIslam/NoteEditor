@@ -66,7 +66,6 @@ class NotesDetailFragment : Fragment() {
                 showEditFragment()
                 return true
             }
-
         }
 
         return super.onOptionsItemSelected(item)

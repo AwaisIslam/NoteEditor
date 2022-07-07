@@ -1,12 +1,12 @@
 package com.ak.noteeditor.repository
 
-import com.ak.noteeditor.data.NoteEditorModel
+import com.ak.noteeditor.data.NoteModel
 
-class NoteEditorRepository {
+class NoteRepository {
 
-    var items = emptyList<NoteEditorModel>()
+    var items = emptyList<NoteModel>()
 
-    fun save(model: NoteEditorModel) {
+    fun save(model: NoteModel) {
         items = if (items.any { it.id == model.id }) {
             items.map { if (it.id == model.id) model else it }
         } else {
@@ -14,7 +14,7 @@ class NoteEditorRepository {
         }
     }
 
-    fun deleteNote(model: NoteEditorModel) {
+    fun deleteNote(model: NoteModel) {
         items = items.filter { it.id != model.id }
     }
 

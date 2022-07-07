@@ -1,7 +1,7 @@
 package com.ak.noteeditor.ui.activities
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.appcompat.app.AppCompatActivity
 import com.ak.noteeditor.R
 import com.ak.noteeditor.databinding.ActivityAboutBinding
 
