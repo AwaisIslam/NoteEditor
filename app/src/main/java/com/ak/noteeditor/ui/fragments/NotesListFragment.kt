@@ -71,6 +71,11 @@ class NotesListFragment : Fragment() {
         binding?.textViewPlaceholder?.visibility = View.GONE
     }
 
+    override fun onDestroy() {
+        binding = null
+        super.onDestroy()
+    }
+
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         inflater.inflate(R.menu.new_note_menu,menu)
 
@@ -88,16 +93,11 @@ class NotesListFragment : Fragment() {
         return super.onOptionsItemSelected(item)
     }
 
-    private fun addNotes() {
-        findNavController().navigate(NotesListFragmentDirections.actionNotesListFragmentToNoteEditFragment(null))
-    }
-
     private fun showFragmentDetails(model: NoteModel) {
         findNavController().navigate(NotesListFragmentDirections.actionNotesListFragmentToNotesDetailFragment(model.id))
     }
 
-    override fun onDestroy() {
-        binding = null
-        super.onDestroy()
+    private fun addNotes() {
+        findNavController().navigate(NotesListFragmentDirections.actionNotesListFragmentToNoteEditFragment(null))
     }
 }

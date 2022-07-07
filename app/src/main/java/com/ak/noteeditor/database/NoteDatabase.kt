@@ -13,14 +13,27 @@ private const val NOTE_DB = "note.db"
 
 @Database(entities = [NoteEntity::class], version = 1)
 @TypeConverters(DataTimeConverter::class)
-
 abstract class NoteDatabase : RoomDatabase() {
 
-    abstract fun notesDAO(): NotesDAO
-
     companion object {
-        fun newInstance(context: Context) =
-            Room.databaseBuilder(context, NoteDatabase::class.java, NOTE_DB)
+
+        @Volatile
+        private var INSTANCE: NoteDatabase? = null
+        private val LOCK = Any()
+
+        operator fun invoke(context: Context) = INSTANCE ?: synchronized(LOCK) {
+            INSTANCE ?: newInstance(context).also {
+                INSTANCE = it
+            }
+        }
+
+        private fun newInstance(context: Context): NoteDatabase{
+
+            return Room.databaseBuilder(context, NoteDatabase::class.java, NOTE_DB)
+                .fallbackToDestructiveMigration()
                 .build()
+        }
     }
+
+    abstract fun notesDAO(): NotesDAO
 }

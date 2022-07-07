@@ -15,8 +15,6 @@ data class NoteListViewState(
 
 class NoteListViewModel(private val repository: NoteEditorRepository): ViewModel() {
 
-    val items = repository.notesList()
-
     val states = repository.notesList()
         .map { NoteListViewState(it) }
         .stateIn(viewModelScope, SharingStarted.Eagerly, NoteListViewState())

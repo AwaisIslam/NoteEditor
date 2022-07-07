@@ -38,7 +38,7 @@ class NoteEditFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         viewLifecycleOwner.lifecycleScope.launchWhenStarted {
-            viewModel.states.collect {state->
+            viewModel.states.collect { state->
                 if (savedInstanceState == null){
                     state.item?.let {
                         binding?.apply {
@@ -88,15 +88,15 @@ class NoteEditFragment : Fragment() {
 
             edited.let { viewModel.saveNote(it) }
         }
-        navigateToNoteListFragment()
+        navigateToNoteDetailFragment()
     }
 
-    private fun navigateToNoteListFragment() {
+    private fun navigateToNoteDetailFragment() {
         hideKeyboard()
         findNavController().popBackStack()
     }
 
-    private fun navigateToNoteList() {
+    private fun navigateToNoteListFragment() {
         hideKeyboard()
         findNavController().popBackStack(R.id.notesListFragment,false)
     }
@@ -106,7 +106,7 @@ class NoteEditFragment : Fragment() {
         model?.let {
             viewModel.deleteNote(it)
         }
-        navigateToNoteList()
+        navigateToNoteListFragment()
     }
 
     private fun hideKeyboard() {

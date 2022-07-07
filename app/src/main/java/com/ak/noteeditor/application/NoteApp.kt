@@ -5,6 +5,7 @@ import com.ak.noteeditor.database.NoteDatabase
 import com.ak.noteeditor.repository.NoteEditorRepository
 import com.ak.noteeditor.viewmodel.NoteListViewModel
 import com.ak.noteeditor.viewmodel.SingleNoteViewModel
+import com.ak.utils.AppModules
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.SupervisorJob
 import org.koin.android.ext.koin.androidContext
@@ -16,7 +17,9 @@ import org.koin.dsl.module
 
 class NoteApp: Application() {
 
-    private val koinModule = module {
+    /*private val koinModule = module {
+        single(named("appScope")) { CoroutineScope(SupervisorJob()) }
+        single { NoteDatabase.newInstance(androidContext()) }
         single {
             NoteEditorRepository(
                 get<NoteDatabase>().notesDAO(),
@@ -25,9 +28,7 @@ class NoteApp: Application() {
         }
         viewModel{ NoteListViewModel(get()) }
         viewModel{ (noteId: String) -> SingleNoteViewModel(get(), noteId) }
-        single { NoteDatabase.newInstance(androidContext()) }
-        single(named("appScope")) { CoroutineScope(SupervisorJob()) }
-    }
+    }*/
 
     override fun onCreate() {
         super.onCreate()
@@ -40,7 +41,7 @@ class NoteApp: Application() {
         startKoin {
             androidLogger()
             androidContext(this@NoteApp)
-            koin.loadModules(listOf(koinModule))
+            koin.loadModules(AppModules)
         }
     }
 }

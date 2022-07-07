@@ -22,8 +22,6 @@ class SingleNoteViewModel(
         .map { SingleNoteViewState(it) }
         .stateIn(viewModelScope, SharingStarted.Eagerly, SingleNoteViewState())
 
-    fun getNoteModel() = repository.find(noteId)
-
     fun saveNote(model: NoteModel) {
         viewModelScope.launch {
 
